@@ -7,4 +7,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('users', Users::class)->name('users');
+// Route::get('users', Users::class)->name('users');
+Route::get('users', function() {
+    return view('users');
+})->name('users');

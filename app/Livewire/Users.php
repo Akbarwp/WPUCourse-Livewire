@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -66,6 +67,8 @@ class Users extends Component
 
         //? How to sending flash message
         session()->flash("success","User created successfully.");
+
+        $this->dispatch("user-created");
     }
 
     //? How to make searching feature
@@ -75,6 +78,7 @@ class Users extends Component
     }
 
     //? For searching in different page and using 'wire:model.live', and specific model for 'query'
+    #[On('user-created')]
     public function updatedQuery()
     {
         $this->resetPage();
