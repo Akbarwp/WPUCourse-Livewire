@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserRegisterForm extends Component
 {
+    //? How to Uploading file form
     use WithFileUploads;
 
+    //? How to make data binding
+    //? How to validate form input, example 2
     #[Validate(['required','string','min:3', 'max:255'])]
     public string $name = "";
 
@@ -24,10 +27,22 @@ class UserRegisterForm extends Component
     #[Validate(['image', 'max:2048', 'mimes:jpg,png,jpeg'])]
     public string $avatar = "";
 
+    //? How to make actions
     public function createNewUser()
     {
+        //? How to validation data, example 1
+        // $validated = $this->validate([
+        //     'name' => ['required','string','min:3', 'max:255'],
+        //     'email' => ['required','string','email:dns', 'unique:users'],
+        //     'password' => ['required','min:8', 'max:255'],
+        // ]);
+        // User::create([
+        //     "name"=> $validated['name'],
+        //     "email"=> $validated['email'],
+        //     "password"=> Hash::make($validated['password']),
+        // ]);
+
         $validated = $this->validate();
-        $validated["avatar"] = null;
 
         if ($this->avatar) {
             $validated["avatar"] = $this->avatar->store("avatars", "public");
@@ -40,8 +55,11 @@ class UserRegisterForm extends Component
             "avatar"=> $validated["avatar"],
         ]);
 
+        //? Reset input field, or spesific field
         $this->reset();
+        // $this->reset(['name', 'email', 'password']);
 
+        //? How to sending flash message
         session()->flash("success","User created successfully.");
 
         //? How to dispatch event for another component

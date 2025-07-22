@@ -10,16 +10,18 @@ use Livewire\WithPagination;
 
 class UserList extends Component
 {
+    //? How to use Pagination
     use WithPagination;
 
     public $query = "";
 
+    //? How to make searching feature
     public function searchUser()
     {
         $this->resetPage();
     }
 
-    //? How to dispatch event for another component
+    //? For searching in different page and using 'wire:model.live', and specific model for 'query'
     #[On('user-created')]
     public function updatedQuery()
     {

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Users</title>
+    <title>{{ $title ?? env("APP_NAME") }}</title>
     <link rel="shortcut icon" href="https://img.daisyui.com/images/profile/demo/yellingwoman@192.webp" type="image/x-icon">
 
     {{-- Font --}}
